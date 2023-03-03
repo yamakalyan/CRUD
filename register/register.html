@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration</title>
+    <link rel="stylesheet" href="/navbar.css">
+</head>
+<body>
+    <header>
+        <div class="headLinks"> <a href="/index.html">title here</a></div>
+        <nav>
+            <ul>
+               
+                <li><button><a href="/login/loginpage.html">Login</a></button></li>
+                <li><a href="#help">Help</a></li>
+            </ul>
+        </nav>
+    </header>
+<div class="container">
+    <div class="box">
+        <div class="inputs">
+            <form >
+                <p id="notify"></p>
+                <div class="nameInput">
+                    <label for="name">Enter Name ;</label>
+                    <input type="text" id="nameInput">
+                </div>
+                <div class="mobileInput">
+                    <label for="name">Enter Mobile ;</label>
+                    <input type="number" id="mobileInput">
+                </div>
+                <div class="emailInput">
+                    <label for="name">Enter Email;</label>
+                    <input type="email" id="emailInput">
+                </div>
+                <div class="passwordInput">
+                    <label for="name">Enter Password ;</label>
+                    <input type="password" id="passwordInput">
+                </div>
+                <div class="btn">
+                    <input type="button" onclick="saveData()" value="Sign-up" id="btn">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>
+<script>
+   
+    var getExObj = JSON.parse(localStorage.getItem('users'))
+    if (getExObj == null | undefined) {
+        getExObj = []
+    } else {
+        getExObj = getExObj
+    }
+
+          function saveData(e){
+            var id = Math.floor(1000000 * Math.random() * 9999999);
+            var date = new Date();
+            var day = date.getDate()
+            var month = date.getMonth()
+            var year = date.getFullYear();
+            var dateID = day + ''+ month +'' + year
+            var nameIn = document.getElementById("nameInput").value;
+            var mobileIn = document.getElementById("mobileInput").value
+            var emailIn = document.getElementById("emailInput").value;
+            var passwordIn = document.getElementById("passwordInput").value
+            
+            let filteringEmail = getExObj.filter((filter)=> filter.email == emailIn)
+            // let filteringMobile = getExObj.filter((filter)=> filter.mobile == mobileIn)
+
+            if (filteringEmail.length == 0) {
+                
+                let register = {
+                    id : dateID+id,
+                    name : nameIn,
+                    mobile : mobileIn,
+                    email : emailIn,
+                    password : passwordIn
+                }
+                getExObj.push(register)
+    
+                let cnvrt = JSON.stringify(getExObj)
+    
+                let local = localStorage.setItem('users', cnvrt);
+    
+                document.getElementById('notify').innerHTML = 'user created succesfully';
+
+            } else {
+
+                var takingmobile = filteringEmail[0].mobile
+
+                if (takingmobile == mobileIn) {
+
+                document.getElementById('notify').innerHTML = 'user already exist try to <a href="/login/loginpage.html">login</a>'
+
+                } else {
+                    
+                document.getElementById('notify').innerHTML = 'user email have been used change email and try again'
+                }
+
+            }
+        }
+
+</script>
+</html>

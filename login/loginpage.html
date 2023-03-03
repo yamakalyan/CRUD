@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login </title>
+    <link rel="stylesheet" href="/navbar.css">
+</head>
+<body>
+    <header>
+        <div class="headLinks"> <a href="/index.html">title here</a></div>
+        <nav>
+            <ul>
+                <li><button><a href="/register/register.html">Register</a></button></li>
+                <li><a href="#help">Help</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div class="container">
+        <div class="box">
+            <div class="inputs">
+                <form>
+                    <div class="emailInput">
+                        <label for="name" id="msg">User name ;</label>
+                        <input type="email" id="emailInput">
+                    </div>
+                    <div class="passwordInput">
+                        <label for="name">User password ;</label>
+                        <input type="password" id="passwordInput">
+                    </div>
+                    <div class="btn">
+                        <input type="button" onclick="saveData()" id="btn" value="Login">
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div><h1 id="alert"></h1></div>
+    </div>
+</body>
+<script>
+
+        var xobj = JSON.parse(localStorage.getItem('users'))
+
+        if (xobj == null | undefined) {
+            xobj = []
+        } else {
+            xobj = xobj
+        }
+
+        function saveData(){
+
+            var username = document.getElementById('emailInput').value;
+            var userpassword = document.getElementById('passwordInput').value;
+
+            let login = {
+                email : username,
+                password : userpassword
+            }
+
+            let checking = xobj.filter((f)=>f.email == username)
+            
+            if (checking.length == 0) {
+                
+                document.getElementById('alert').innerHTML = 'user not found try to <a href="/register/register.html">register</a>'
+
+            } else {
+
+                var checkingAPsssword = checking[0].password
+
+                if (checkingAPsssword == userpassword) {
+
+                    // alert('user found succesfully')
+
+                    let stringfy =JSON.stringify(xobj);
+                    
+                    var data = ''
+                    data += `<table border='1'>
+                    <tr>
+                        <th>id </th>
+                        <th>name</th>
+                        <th>mobile</th>
+                        <th>email<?th>
+                        <th>passowrd</th>`
+
+                        xobj.map((a)=>{
+                            data += `<tr>`
+                                data += `<td>` + a.id + `</td>`
+                                data += `<td>` + a.name + `</td>`
+                                data += `<td>` + a.mobile + `</td>`
+                                data += `<td>` + a.email + `</td>`
+                                data += `<td>` + a.password + `</td>`
+                        })
+                        data += `</table>`
+                        document.getElementById('alert').innerHTML = login;
+                } else {
+
+                document.getElementById('alert').innerHTML = 'incorrect password'
+                    
+                }
+            }
+        }
+</script>
+</html>
