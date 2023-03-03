@@ -5,14 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login </title>
-    <link rel="stylesheet" href="/navbar.css">
+    <link rel="stylesheet" href="/style.css">
 </head>
 <body>
     <header>
-        <div class="headLinks"> <a href="/index.html">title here</a></div>
+        <div class="headLinks"> <a href="/home.html">title here</a></div>
         <nav>
             <ul>
-                <li><button><a href="/register/register.html">Register</a></button></li>
+                <li><button><a href="/register.html">Register</a></button></li>
                 <li><a href="#help">Help</a></li>
             </ul>
         </nav>
@@ -30,7 +30,7 @@
                         <input type="password" id="passwordInput">
                     </div>
                     <div class="btn">
-                        <input type="button" onclick="saveData()" id="btn" value="Login">
+                        <input type="button" onclick="loginUser()" id="btn" value="Login">
                     </div>
                 </form>
             </div>
@@ -48,7 +48,7 @@
             xobj = xobj
         }
 
-        function saveData(){
+        function loginUser(){
 
             var username = document.getElementById('emailInput').value;
             var userpassword = document.getElementById('passwordInput').value;
